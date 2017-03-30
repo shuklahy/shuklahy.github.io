@@ -187,7 +187,7 @@ ul#nav li.current a { color: #F06000; }
 /* ------------------------------------------------------------------ */
 
 #about {
-   background: #2B2B2B;
+   background: #ebeeee;
    padding-top: 96px;
    padding-bottom: 66px;
    overflow: hidden;
@@ -198,7 +198,7 @@ ul#nav li.current a { color: #F06000; }
 
 #about h2 {
    font: 22px/30px 'opensans-bold', sans-serif;
-   color: #fff;
+   color: #313131;
    margin-bottom: 12px;
 }
 #about p {
@@ -788,7 +788,7 @@ call-to-action .button {
 /* ------------------------------------------------------------------ */
 
 #contact {
-   background: #191919;
+   background: #ebeeee;
    padding-top: 96px;
    padding-bottom: 102px;
    color: #636363;
