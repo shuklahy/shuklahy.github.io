@@ -795,7 +795,7 @@ call-to-action .button {
 }
 #contact .section-head { margin-bottom: 42px; }
 
-#contact a, #contact a:visited  { color: #11ABB0; }
+#contact a, #contact a:visited  { color: #CCC; }
 #contact a:hover, #contact a:focus { color: #fff; }
 
 #contact h1 {
@@ -925,17 +925,20 @@ call-to-action .button {
 /* ------------------------------------------------------------------ */
 
 footer {
-   padding-top: 48px;
-   margin-bottom: 48px;
+   padding-top: 10px;
+   margin-bottom: 10px;
    color: #303030;
-   font-size: 14px;
-   text-align: center;
+   font-size: 10px;
+   text-align: right;
    position: relative;
 }
 
-footer a, footer a:visited { color: #525252; }
-footer a:hover, footer a:focus { color: #fff; }
+footer a, footer a:visited { color: #303030; }
+footer a:hover, footer a:focus { color: #303030; }
 
+#go-top{
+    text-align: center;
+}
 /* copyright */
 footer .copyright {
     margin: 0;
@@ -945,7 +948,7 @@ footer .copyright li {
     display: inline-block;
     margin: 0;
     padding: 0;
-    line-height: 24px;
+    line-height: 10px;
 }
 .ie footer .copyright li {
    display: inline;
@@ -954,7 +957,7 @@ footer .copyright li:before {
     content: "\2022";
     padding-left: 10px;
     padding-right: 10px;
-    color: #095153;
+    color: #303030;
 }
 footer .copyright  li:first-child:before {
     display: none;
