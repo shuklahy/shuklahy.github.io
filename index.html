@@ -689,36 +689,75 @@
    ================================================== -->
    <section id="contact">
       <div class="row">
-      <div class="three columns">
+      <div class="eight columns">
+      
+         <form action="" method="post" id="contactForm" name="contactForm">
+          <fieldset>
+
+                  <div>
+               <label for="contactName">Name <span class="required">*</span></label>
+               <input type="text" value="" size="35" id="contactName" name="contactName">
+                  </div>
+
+                  <div>
+               <label for="contactEmail">Email <span class="required">*</span></label>
+               <input type="text" value="" size="35" id="contactEmail" name="contactEmail">
+                  </div>
+
+                  <div>
+               <label for="contactSubject">Subject</label>
+               <input type="text" value="" size="35" id="contactSubject" name="contactSubject">
+                  </div>
+
+                  <div>
+                     <label for="contactMessage">Message <span class="required">*</span></label>
+                     <textarea cols="50" rows="15" id="contactMessage" name="contactMessage"></textarea>
+                  </div>
+
+                  <div>
+                     <button class="submit">Submit</button>
+                     <span id="image-loader">
+                        <img alt="" src="images/loader.gif">
+                     </span>
+                  </div>
+
+          </fieldset>
+           </form> <!-- Form End -->
+
+               <!-- contact-warning -->
+               <div id="message-warning"> Error boy</div>
+               <!-- contact-success -->
+           <div id="message-success">
+                  <i class="fa fa-check"></i>Your message was sent, thank you!<br>
+           </div>
+      
       </div>
-          <div class="six columns">
+      <div class="four columns">
 
-           <div class="row">
+         
 
-               <div class="columns contact-details">
+             <div class="columns contact-details">
 
-                  <h2>Contact Details</h2>
-                  <p class="address">
-                     <span>Hitendra Shukla</span><br>
-                     <span>1005 E University Drive, Apt 201<br>
-                           Tempe, AZ 85281 US
-                     </span><br>
-                     <span>(480)&nbsp;410-1791</span><br>
-                     <span>hyshukla@asu.edu</span>
-                  </p>
+                <h2>Contact Details</h2>
+                <p class="address">
+                   <span>Hitendra Shukla</span><br>
+                   <span>1005 E University Drive, Apt 201<br>
+                         Tempe, AZ 85281 US
+                   </span><br>
+                   <span>(480)&nbsp;410-1791</span><br>
+                   <span>hyshukla@asu.edu</span>
+                </p>
 
-               </div>
+             </div>
 
 
 
-            </div> <!-- end row -->
+          </div> <!-- end row -->
 
-		        
+        
 
-      </div>
-      <div class="three columns">
-      </div>
-      </div>
+    </div>
+      
    </section> <!-- Contact Section End-->
 
 
