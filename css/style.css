@@ -560,7 +560,11 @@ section {
     }
 
     .hero {
-        padding-top: 180px;
+        padding-top: 220px;
+    }
+
+    .hero-image {
+        margin-top: 30px;
     }
 
     .hero {
