@@ -67,6 +67,16 @@ $(document).ready(function() {
         });
     }
 
+    // Mouse follow effect on hero
+    $('.hero').on('mousemove', function(e) {
+        const mouseX = e.pageX / $(window).width();
+        const mouseY = e.pageY / $(window).height();
+
+        $('.hero::before').css({
+            'background-position': `${mouseX * 100}% ${mouseY * 100}%`
+        });
+    });
+
     // Animate elements on scroll
     function animateOnScroll() {
         $('.skill-card, .project-card, .stat').each(function() {

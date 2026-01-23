@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>Hitendra Shukla - Software Engineer</title>
     <meta name="description" content="Portfolio of Hitendra Shukla, Senior Software Engineer">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -16,7 +19,10 @@
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <a href="#home" class="nav-logo">HS</a>
+            <a href="#home" class="nav-logo">
+                <span class="logo-text">HS</span>
+                <span class="logo-accent"></span>
+            </a>
             <ul class="nav-menu">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
@@ -31,21 +37,28 @@
     </nav>
 
     <section id="home" class="hero">
-        <div class="hero-content">
-            <h1 class="hero-title">Hi, I'm <span class="highlight">Hitendra Shukla</span></h1>
-            <p class="hero-subtitle">Senior Software Engineer specializing in distributed systems and scalable applications</p>
-            <div class="hero-buttons">
-                <a href="#about" class="btn btn-primary">Learn More</a>
-                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+        <div class="hero-container">
+            <div class="hero-image animate-fade-in">
+                <div class="image-container">
+                    <img src="images/profile_jan2026.jpeg" alt="Hitendra Shukla" class="profile-img">
+                    <div class="image-overlay"></div>
+                </div>
             </div>
-            <div class="social-links">
-                <a href="https://github.com/shuklahy" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/hitendra-shukla-858b797a" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="https://www.instagram.com/hitendra_shukla/" target="_blank"><i class="fab fa-instagram"></i></a>
+            <div class="hero-content animate-fade-in-delay">
+                <div class="brand-tag">HS</div>
+                <h1 class="hero-title">Hi, I'm <span class="highlight">Hitendra Shukla</span></h1>
+                <p class="hero-subtitle">Senior Software Engineer specializing in distributed systems and scalable applications</p>
+                <p class="hero-tagline">Crafting innovative solutions for tomorrow's technology</p>
+                <div class="hero-buttons">
+                    <a href="#about" class="btn btn-primary">Learn More</a>
+                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                </div>
+                <div class="social-links">
+                    <a href="https://github.com/shuklahy" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/hitendra-shukla-858b797a" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.instagram.com/hitendra_shukla/" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
             </div>
-        </div>
-        <div class="hero-image">
-            <img src="images/profilepic.jpg" alt="Hitendra Shukla" class="profile-img">
         </div>
     </section>
 
@@ -182,7 +195,7 @@
                         </div>
                     </div>
                 </div>
-                <form action="https://formspree.io/hitendrashukla111@gmail.com" method="POST" class="contact-form">
+                <form action="https://formspree.io/f/xnjppezd" method="POST" class="contact-form">
                     <div class="form-group">
                         <input type="text" name="name" placeholder="Your Name" required>
                     </div>
