@@ -133,9 +133,35 @@ $(document).ready(function() {
         }
     });
 
-    // Contact form handling
+    // Email validation function
+    function isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
+    // Contact form handling with validation
     $('.contact-form').on('submit', function(e) {
         e.preventDefault();
+
+        const email = $('#contactForm input[name="email"]').val();
+        const name = $('#contactForm input[name="name"]').val();
+        const message = $('#contactForm textarea[name="message"]').val();
+
+        // Validation
+        if (!name.trim()) {
+            alert('Please enter your name.');
+            return;
+        }
+
+        if (!isValidEmail(email)) {
+            alert('Please enter a valid email address.');
+            return;
+        }
+
+        if (!message.trim()) {
+            alert('Please enter a message.');
+            return;
+        }
 
         const formData = new FormData(this);
         const submitBtn = $(this).find('button[type="submit"]');
