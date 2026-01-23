@@ -131,6 +131,22 @@ $(document).ready(function() {
                 event_label: `${scrollPercent}%`
             });
         }
+
+        // Back to top button
+        if (scrollTop > 300) {
+            $('#back-to-top').addClass('show');
+        } else {
+            $('#back-to-top').removeClass('show');
+        }
+    });
+
+    // Back to top functionality
+    $('#back-to-top').on('click', function() {
+        $('html, body').animate({ scrollTop: 0 }, 800, 'easeInOutCubic');
+        gtag('event', 'click', {
+            event_category: 'navigation',
+            event_label: 'back-to-top'
+        });
     });
 
     // Email validation function
