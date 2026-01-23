@@ -6,13 +6,28 @@
 
  jQuery(document).ready(function($) {
 
-/*----------------------------------------------------*/
-/* FitText Settings
------------------------------------------------------- */
+ /*----------------------------------------------------*/
+ /* FitText Settings
+ ------------------------------------------------------ */
 
-    setTimeout(function() {
-	   $('h1.responsive-headline').fitText(1, { minFontSize: '40px', maxFontSize: '90px' });
-	 }, 100);
+     setTimeout(function() {
+ 	   $('h1.responsive-headline').fitText(1, { minFontSize: '40px', maxFontSize: '90px' });
+ 	 }, 100);
+
+ /*----------------------------------------------------*/
+ /* Typing Effect
+ ------------------------------------------------------ */
+
+     setTimeout(function() {
+         var typed = new Typed('#typed-headline', {
+             strings: ["Computer Science student pursuing Master's at Arizona State University."],
+             typeSpeed: 50,
+             backSpeed: 30,
+             loop: false,
+             showCursor: true,
+             cursorChar: '|'
+         });
+     }, 2000);
 
 
 /*----------------------------------------------------*/
@@ -133,57 +148,82 @@
       randomize: false,
    });
 
-/*----------------------------------------------------*/
-/*  Skill Bar
-------------------------------------------------------*/
+ /*----------------------------------------------------*/
+ /*  Skill Bar
+ ------------------------------------------------------*/
 
-jQuery('.skillbar').each(function(){
-    jQuery(this).find('.skillbar-bar').animate({
-      width:jQuery(this).attr('data-percent')
-    },6000);
-  });
-/*----------------------------------------------------*/
-/*	contact form
-------------------------------------------------------*/
-
-   $('form#contactForm button.submit').click(function() {
-
-      $('#image-loader').fadeIn();
-
-      var contactName = $('#contactForm #contactName').val();
-      var contactEmail = $('#contactForm #contactEmail').val();
-      var contactSubject = $('#contactForm #contactSubject').val();
-      var contactMessage = $('#contactForm #contactMessage').val();
-
-      var data = 'contactName=' + contactName + '&contactEmail=' + contactEmail +
-               '&contactSubject=' + contactSubject + '&contactMessage=' + contactMessage;
-
-      $.ajax({
-
-	      type: "POST",
-	      url: "inc/sendEmail.php",
-	      data: data,
-	      success: function(msg) {
-
-            // Message was sent
-            if (msg == 'OK') {
-               $('#image-loader').fadeOut();
-               $('#message-warning').hide();
-               $('#contactForm').fadeOut();
-               $('#message-success').fadeIn();   
-            }
-            // There was an error
-            else {
-               $('#image-loader').fadeOut();
-               $('#message-warning').html(msg);
-	            $('#message-warning').fadeIn();
-            }
-
-	      }
-
-      });
-      return false;
+ jQuery('.skillbar').each(function(){
+     jQuery(this).find('.skillbar-bar').animate({
+       width:jQuery(this).attr('data-percent')
+     },6000);
    });
+
+ /*----------------------------------------------------*/
+ /*  Skill Bar Hover Effects
+ ------------------------------------------------------*/
+
+ $('.skillbar').hover(
+     function() {
+         $(this).find('.skillbar-bar').stop().animate({width: '100%'}, 500);
+         $(this).find('.skill-bar-percent').text('Mastered!');
+     },
+     function() {
+         var originalPercent = $(this).attr('data-percent');
+         $(this).find('.skillbar-bar').stop().animate({width: originalPercent}, 500);
+         $(this).find('.skill-bar-percent').text(originalPercent);
+     }
+ );
+ /*----------------------------------------------------*/
+ /* Theme Toggle
+ ------------------------------------------------------*/
+
+     $('#theme-toggle').on('click', function() {
+         var currentTheme = document.documentElement.getAttribute('data-theme');
+         var newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+         document.documentElement.setAttribute('data-theme', newTheme);
+         $(this).text(newTheme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode');
+         localStorage.setItem('theme', newTheme);
+     });
+
+     // Load saved theme
+     var savedTheme = localStorage.getItem('theme') || 'light';
+     document.documentElement.setAttribute('data-theme', savedTheme);
+     $('#theme-toggle').text(savedTheme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode');
+
+ /*----------------------------------------------------*/
+ /*	contact form
+ ------------------------------------------------------*/
+
+    $('form#contactForm').submit(function(e) {
+        e.preventDefault();
+        $('#image-loader').fadeIn();
+
+        var formData = new FormData(this);
+
+        $.ajax({
+            type: "POST",
+            url: $(this).attr('action'),
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(msg) {
+                $('#image-loader').fadeOut();
+                if (msg.includes('Thank You')) {
+                    $('#message-warning').hide();
+                    $('#contactForm').fadeOut();
+                    $('#message-success').fadeIn();
+                } else {
+                    $('#message-warning').html('Error sending message. Please try again.');
+                    $('#message-warning').fadeIn();
+                }
+            },
+            error: function() {
+                $('#image-loader').fadeOut();
+                $('#message-warning').html('Error sending message. Please try again.');
+                $('#message-warning').fadeIn();
+            }
+        });
+    });
 
 
 });

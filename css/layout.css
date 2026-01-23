@@ -22,7 +22,7 @@
 /* a. General Styles
 /* ------------------------------------------------------------------ */
 
-body { background: #0f0f0f; }
+body { background: var(--bg-color); color: var(--text-color); }
 
 /* ------------------------------------------------------------------ */
 /* b. Header Styles
@@ -33,7 +33,7 @@ header {
    height: 800px;
    min-height: 500px;
    width: 100%;
-   background: #161415 url(../images/header-background.jpg) no-repeat top center;
+    background: var(--secondary-bg) url(../images/header-background.jpg) no-repeat top center;
    background-size: cover !important;
 	-webkit-background-size: cover !important;
    text-align: center;
@@ -98,8 +98,8 @@ header .social li {
    margin: 0 15px;
    padding: 0;
 }
-header .social li a { color: #fff; }
-header .social li a:hover { color: #11ABB0; }
+ header .social li a { color: var(--text-color); }
+ header .social li a:hover { color: var(--accent-color); }
 
 /* scrolldown link */
 header .scrolldown a {
@@ -107,13 +107,13 @@ header .scrolldown a {
    bottom: 30px;
    left: 50%;
    margin-left: -29px;
-   color: #fff;
+    color: var(--text-color);
    display: block;
    height: 42px;
    width: 42px;
    font-size: 42px;
    line-height: 42px;
-   color: #fff;
+    color: var(--text-color);
    border-radius: 100%;
 
    -webkit-transition: all .3s ease-in-out;
@@ -121,7 +121,7 @@ header .scrolldown a {
    -o-transition: all .3s ease-in-out;
    transition: all .3s ease-in-out;
 }
-header .scrolldown a:hover { color: #11ABB0; }
+ header .scrolldown a:hover { color: var(--accent-color); }
 
 /* primary navigation
 --------------------------------------------------------------------- */
@@ -173,7 +173,7 @@ ul#nav li a {
    line-height: 32px;
 	text-decoration: none;
    text-align: left;
-   color: #fff;
+    color: var(--text-color);
 
 	-webkit-transition: color .2s ease-in-out;
 	-moz-transition: color .2s ease-in-out;
@@ -183,7 +183,7 @@ ul#nav li a {
 }
 
 ul#nav li a:active { background-color: transparent !important; }
-ul#nav li.current a { color: #F06000; }
+ ul#nav li.current a { color: var(--accent-color); }
 
 
 /* ------------------------------------------------------------------ */
@@ -197,8 +197,8 @@ ul#nav li.current a { color: #F06000; }
    overflow: hidden;
 }
 
-#about a, #about a:visited  { color: #fff; }
-#about a:hover, #about a:focus { color: #11ABB0; }
+ #about a, #about a:visited  { color: var(--text-color); }
+ #about a:hover, #about a:focus { color: var(--accent-color); }
 
 #about h2 {
    font: 22px/30px 'opensans-bold', sans-serif;
@@ -223,8 +223,8 @@ ul#nav li.current a { color: #F06000; }
    background: #444;
 }
 #about .download .button:hover {
-   background: #fff;
-   color: #2B2B2B;
+    background: var(--card-bg);
+    color: var(--card-text);
 }
 #about .download .button i {
    margin-right: 15px;
@@ -237,14 +237,14 @@ ul#nav li.current a { color: #F06000; }
 /* ------------------------------------------------------------------ */
 
 #resume {
-   background: #fff;
+ 	background: var(--card-bg);
    padding-top: 90px;
    padding-bottom: 72px;
    overflow: hidden;
 }
 
-#resume a, #resume a:visited  { color: #11ABB0; }
-#resume a:hover, #resume a:focus { color: #313131; }
+ #resume a, #resume a:visited  { color: var(--link-color); }
+ #resume a:hover, #resume a:focus { color: var(--card-text); }
 
 #resume h1 {
    font: 18px/24px 'opensans-bold', sans-serif;
@@ -428,7 +428,7 @@ ul#nav li.current a { color: #F06000; }
 /* Portfolio Content */
 #portfolio-wrapper .columns { margin-bottom: 36px; }
 .portfolio-item .item-wrap {
-   background: #fff;
+ 	background: var(--card-bg);
    overflow: hidden;
    position: relative;
 
@@ -464,7 +464,7 @@ ul#nav li.current a { color: #F06000; }
 }
 .portfolio-item .item-wrap .link-icon {
    display: block;
-   color: #fff;
+    color: var(--text-color);
    height: 30px;
    width: 30px;
    font-size: 18px;
@@ -492,7 +492,7 @@ ul#nav li.current a { color: #F06000; }
 .portfolio-item .portfolio-item-meta { padding: 18px }
 .portfolio-item .portfolio-item-meta h5 {
    font: 14px/21px 'opensans-bold', sans-serif;
-   color: #fff;
+    color: var(--text-color);
 }
 .portfolio-item .portfolio-item-meta p {
    font: 12px/18px 'opensans-light', sans-serif;
@@ -547,7 +547,7 @@ ul#nav li.current a { color: #F06000; }
    text-align: left;
 }
 .popup-modal .link-box a {
-   color: #fff;
+    color: var(--text-color);
 	font: 11px/21px 'opensans-bold', sans-serif;
 	text-transform: uppercase;
    letter-spacing: 3px;
@@ -591,7 +591,7 @@ ul#nav li.current a { color: #F06000; }
    font: 18px/24px 'opensans-bold', sans-serif;
    text-transform: uppercase;
    letter-spacing: 3px;
-   color: #fff;
+    color: var(--text-color);
 }
 #call-to-action h1 span { display: none; }
 #call-to-action .header-col h1:before {
@@ -602,7 +602,7 @@ ul#nav li.current a { color: #F06000; }
    line-height: 72px;
    text-align: left;
    float: left;
-   color: #fff;
+    color: var(--text-color);
 }
 #call-to-action .action {
    margin-top: 12px;
@@ -627,8 +627,8 @@ call-to-action .button {
 */
 #call-to-action .button:hover,
 #call-to-action .button:active {
-   background: #FFFFFF;
-   color: #0D0D0D;
+    background: var(--card-bg);
+    color: var(--card-text);
 }
 #call-to-action p span {
 	font-family: 'opensans-semibold', sans-serif; 
@@ -640,7 +640,7 @@ call-to-action .button {
 /* ------------------------------------------------------------------ */
 
 #testimonials {
-   background: #1F1F1F url(../images/testimonials-bg.jpg) no-repeat center center;
+    background: var(--secondary-bg) url(../images/testimonials-bg.jpg) no-repeat center center;
    background-size: cover !important;
 	-webkit-background-size: cover !important;
    background-attachment: fixed;
@@ -658,7 +658,7 @@ call-to-action .button {
    font: 18px/24px 'opensans-bold', sans-serif;   
    text-transform: uppercase;
    letter-spacing: 3px;
-   color: #fff;
+    color: var(--text-color);
 }
 #testimonials h1 span { display: none; }
 #testimonials .header-col { padding-top: 9px; }
@@ -670,7 +670,7 @@ call-to-action .button {
    line-height: 72px;
    text-align: left;
    float: left;
-   color: #fff;
+    color: var(--text-color);
 }
 
 /*	Blockquotes */
@@ -693,7 +693,7 @@ call-to-action .button {
    font-size: 12px;
    font-style: normal;
    line-height: 18px;
-   color: #fff;
+    color: var(--text-color);
 }
 #testimonials blockquote cite:before { content: "\2014 \0020"; }
 #testimonials blockquote cite a,
@@ -779,7 +779,7 @@ call-to-action .button {
     background: rgba(255, 255, 255, .7);
 }
 .flex-control-paging li a.flex-active {
-    background: #fff;
+  	background: var(--card-bg);
     background: rgba(255, 255, 255, .9);
     cursor: default;
 }
@@ -1001,7 +1001,7 @@ footer .social-links li:first-child { margin-left: 0; }
    -ms-transition: all 0.2s ease-in-out;
    transition: all 0.2s ease-in-out;
 
-   color: #fff;
+    color: var(--text-color);
    font-size: 21px;
    line-height: 60px;
  	border-radius: 100%;

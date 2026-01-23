@@ -23,12 +23,32 @@ e. Others
 =====================================================================  */
 
 /* ------------------------------------------------------------------ */
-/* a. Webfonts and Icon fonts
- ------------------------------------------------------------------ */
+ /* a. Webfonts and Icon fonts
+  ------------------------------------------------------------------ */
 
-@import url("fonts.css");
-@import url("fontello/css/fontello.css");
-@import url("font-awesome/css/font-awesome.min.css");
+ @import url("fonts.css");
+ @import url("fontello/css/fontello.css");
+ @import url("font-awesome/css/font-awesome.min.css");
+
+/* ------------------------------------------------------------------ */
+ /* Theme Toggle Button
+  ------------------------------------------------------------------ */
+
+ .theme-toggle-btn {
+     background: var(--accent-color);
+     color: #fff;
+     border: none;
+     padding: 8px 16px;
+     border-radius: 4px;
+     cursor: pointer;
+     margin-bottom: 20px;
+     font-size: 14px;
+     transition: background 0.3s ease;
+ }
+
+ .theme-toggle-btn:hover {
+     background: var(--link-color);
+ }
 
 /* ------------------------------------------------------------------
 /* b. Reset
@@ -36,6 +56,26 @@ e. Others
       Normalize.css - https://github.com/necolas/normalize.css/
       HTML5 Doctor Reset - html5doctor.com/html-5-reset-stylesheet/
 /* ------------------------------------------------------------------ */
+
+:root {
+    --bg-color: #0f0f0f;
+    --text-color: #fff;
+    --secondary-bg: #161415;
+    --accent-color: #11ABB0;
+    --link-color: #11ABB0;
+    --card-bg: #fff;
+    --card-text: #2B2B2B;
+}
+
+[data-theme="dark"] {
+    --bg-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --secondary-bg: #2a2a2a;
+    --accent-color: #00d4ff;
+    --link-color: #00d4ff;
+    --card-bg: #333;
+    --card-text: #e0e0e0;
+}
 
 html, body, div, span, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
