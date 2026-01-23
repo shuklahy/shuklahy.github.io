@@ -159,22 +159,28 @@ $(document).ready(function() {
     $('.contact-form').on('submit', function(e) {
         e.preventDefault();
 
-        const email = $('#contactForm input[name="email"]').val();
-        const name = $('#contactForm input[name="name"]').val();
-        const message = $('#contactForm textarea[name="message"]').val();
+        const email = $(this).find('input[name="email"]').val();
+        const name = $(this).find('input[name="name"]').val();
+        const subject = $(this).find('input[name="subject"]').val();
+        const message = $(this).find('textarea[name="message"]').val();
 
         // Validation
-        if (!name.trim()) {
+        if (!name || typeof name !== 'string' || !name.trim()) {
             alert('Please enter your name.');
             return;
         }
 
-        if (!isValidEmail(email)) {
+        if (!email || typeof email !== 'string' || !isValidEmail(email)) {
             alert('Please enter a valid email address.');
             return;
         }
 
-        if (!message.trim()) {
+        if (!subject || typeof subject !== 'string' || !subject.trim()) {
+            alert('Please enter a subject.');
+            return;
+        }
+
+        if (!message || typeof message !== 'string' || !message.trim()) {
             alert('Please enter a message.');
             return;
         }
