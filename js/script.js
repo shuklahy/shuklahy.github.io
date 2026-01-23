@@ -77,6 +77,31 @@ $(document).ready(function() {
         });
     });
 
+    // Analytics event tracking
+    $('.btn').on('click', function() {
+        const buttonText = $(this).text().trim();
+        gtag('event', 'click', {
+            event_category: 'engagement',
+            event_label: buttonText
+        });
+    });
+
+    $('.social-links a').on('click', function() {
+        const platform = $(this).find('i').attr('class').split(' ')[1].replace('fa-', '');
+        gtag('event', 'click', {
+            event_category: 'social',
+            event_label: platform
+        });
+    });
+
+    $('.project-card').on('click', function() {
+        const projectTitle = $(this).find('h3').text();
+        gtag('event', 'click', {
+            event_category: 'projects',
+            event_label: projectTitle
+        });
+    });
+
     // Animate elements on scroll
     function animateOnScroll() {
         $('.skill-card, .project-card, .stat').each(function() {
@@ -91,6 +116,22 @@ $(document).ready(function() {
 
     $(window).on('scroll', animateOnScroll);
     animateOnScroll(); // Initial check
+
+    // Scroll depth tracking
+    let maxScroll = 0;
+    $(window).on('scroll', function() {
+        const scrollTop = $(this).scrollTop();
+        const docHeight = $(document).height() - $(window).height();
+        const scrollPercent = Math.round((scrollTop / docHeight) * 100);
+
+        if (scrollPercent > maxScroll && scrollPercent % 25 === 0) {
+            maxScroll = scrollPercent;
+            gtag('event', 'scroll', {
+                event_category: 'engagement',
+                event_label: `${scrollPercent}%`
+            });
+        }
+    });
 
     // Contact form handling
     $('.contact-form').on('submit', function(e) {
