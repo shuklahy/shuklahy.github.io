@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System Design Prep - Interview Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .top-nav { display: flex; gap: 16px; align-items: center; margin-bottom: 20px; font-size: .85rem; }
+    .top-nav a { color: #64748b; font-weight: 500; }
+    .top-nav a:hover { color: #7c3aed; }
+    .top-nav .sep { color: #cbd5e1; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: #f7f8fc;
+      color: #1e293b;
+      line-height: 1.7;
+      padding: 40px 20px;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    h1 { font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 4px; }
+    h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #7c3aed;
+      margin-top: 36px;
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+    h3 { font-size: 1rem; font-weight: 700; color: #334155; margin-top: 20px; margin-bottom: 8px; }
+    p, li { margin-bottom: 8px; }
+    a { color: #2563eb; text-decoration: none; font-weight: 500; transition: color .15s; }
+    a:hover { color: #7c3aed; text-decoration: underline; }
+    .subtitle { color: #64748b; font-size: .95rem; margin-bottom: 24px; }
+    hr { border: none; border-top: 2px solid #e2e8f0; margin: 28px 0; }
+
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.06);
+      border: 1px solid #e2e8f0;
+    }
+    .card p { margin-bottom: 4px; }
+    .badge {
+      display: inline-block;
+      background: #ede9fe;
+      color: #7c3aed;
+      font-size: .72rem;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 20px;
+      margin-right: 6px;
+    }
+    .badge-green { background: #dcfce7; color: #16a34a; }
+    .badge-blue { background: #dbeafe; color: #2563eb; }
+    .badge-amber { background: #fef3c7; color: #d97706; }
+    .badge-pink { background: #fce7f3; color: #db2777; }
+    ul { padding-left: 20px; }
+    ul li { list-style: disc; color: #334155; }
+    code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-size: .85em; }
+
+    .progress-wrap {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .progress-bar { flex: 1; min-width: 140px; height: 12px; background: #e2e8f0; border-radius: 99px; overflow: hidden; }
+    .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #7c3aed, #ec4899); border-radius: 99px; transition: width .3s ease; }
+    .progress-text { font-size: .9rem; color: #64748b; font-weight: 600; white-space: nowrap; }
+    .progress-btns { display: flex; gap: 8px; }
+    .btn {
+      font-family: inherit; font-size: .8rem; font-weight: 600; padding: 6px 14px;
+      border: 1px solid #e2e8f0; border-radius: 8px; background: #fff; color: #475569;
+      cursor: pointer; transition: all .15s; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+    }
+    .btn:hover { background: #f1f5f9; border-color: #cbd5e1; }
+    .btn-danger:hover { background: #fef2f2; border-color: #fca5a5; color: #dc2626; }
+
+    table { width: 100%; border-collapse: collapse; font-size: .9rem; background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,.06); border: 1px solid #e2e8f0; }
+    th { text-align: left; color: #475569; font-weight: 700; font-size: .8rem; text-transform: uppercase; letter-spacing: .04em; padding: 12px 14px; background: #f8fafc; border-bottom: 2px solid #e2e8f0; }
+    td { padding: 12px 14px; border-bottom: 1px solid #f1f5f9; vertical-align: middle; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #f8fafc; }
+    td:nth-child(1) { color: #7c3aed; font-weight: 600; font-size: .82rem; width: 22%; }
+    td:nth-child(2) { font-weight: 500; }
+
+    .status-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 30px; height: 30px; border-radius: 10px;
+      border: 2px solid #d1d5db; background: #fff; color: transparent;
+      font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all .15s; flex-shrink: 0;
+    }
+    .status-btn.done { background: #f0fdf4; border-color: #22c55e; color: #16a34a; }
+    .status-btn:hover { border-color: #7c3aed; background: #f5f3ff; }
+    .row-done td { background: #fafafa; }
+    .row-done td:nth-child(2) { color: #94a3b8; text-decoration: line-through; }
+
+    .pillar-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 16px 0; }
+    .pillar-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; text-align: center; box-shadow: 0 1px 4px rgba(0,0,0,.04); }
+    .pillar-card h4 { font-size: 1.5rem; color: #7c3aed; }
+    .pillar-card p { font-size: .85rem; color: #64748b; margin: 0; }
+
+    @media (max-width: 600px) {
+      table, thead, tbody, th, td, tr { display: block; }
+      thead, th { display: none; }
+      td { padding: 8px 12px; position: relative; padding-left: 100px; display: flex; align-items: center; min-height: 30px; }
+      td::before { content: attr(data-label); position: absolute; left: 12px; font-weight: 700; color: #7c3aed; font-size: .8rem; width: 80px; }
+      td:nth-child(1) { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="top-nav">
+      <a href="index.html">&#8592; Home</a>
+      <span class="sep">|</span>
+      <a href="leetcode-tracker.html">LeetCode Tracker</a>
+    </div>
+    <h1>System Design Prep</h1>
+    <p class="subtitle">Master the 5 core designs + key concepts — click ✓ to track progress</p>
+
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <span class="progress-text"><span id="doneCount">0</span> / <span id="totalCount">0</span> done</span>
+      <div class="progress-btns">
+        <button class="btn" id="markAllBtn">Mark All Done</button>
+        <button class="btn btn-danger" id="resetBtn">Reset</button>
+      </div>
+    </div>
+
+    <div class="pillar-grid">
+      <div class="pillar-card"><h4>30%</h4><p>System Design weight in FAANG interviews</p></div>
+      <div class="pillar-card"><h4>5</h4><p>Core designs to master</p></div>
+      <div class="pillar-card"><h4>45 min</h4><p>Per design round</p></div>
+    </div>
+
+    <h2>5 Core Designs (Must Nail)</h2>
+    <p style="color:#64748b;margin-bottom:16px">These cover ~80% of system design interview patterns</p>
+    <table>
+      <thead><tr><th>Design</th><th>Asked At</th><th style="width:50px;text-align:center;">Done</th></tr></thead>
+      <tbody id="designBody"></tbody>
+    </table>
+
+    <h2>Key Concepts to Know Cold</h2>
+    <table>
+      <thead><tr><th>Concept</th><th>Why It Matters</th><th style="width:50px;text-align:center;">Done</th></tr></thead>
+      <tbody id="conceptBody"></tbody>
+    </table>
+
+    <h2>Resources</h2>
+    <div class="card">
+      <p><strong>Alex Xu - System Design Interview</strong> <span class="badge">Vol 1 & 2</span></p>
+      <a href="https://www.amazon.com/System-Design-Interview-Insiders-Guide/dp/1736049119" target="_blank">Amazon link</a>
+      <p style="margin-top:12px"><strong>ByteByteGo</strong> <span class="badge badge-blue">Newsletter</span><span class="badge badge-green">YouTube</span></p>
+      <a href="https://www.youtube.com/@ByteByteGo" target="_blank">youtube.com/@ByteByteGo</a>
+      <p style="margin-top:12px"><strong>Designing Data-Intensive Applications</strong> <span class="badge badge-amber">Martin Kleppmann</span></p>
+      <a href="https://dataintensive.net/" target="_blank">dataintensive.net</a>
+      <p style="margin-top:12px"><strong>Hello Interview - System Design</strong> <span class="badge badge-pink">Mock platform</span></p>
+      <a href="https://www.hellointerview.com/learn/system-design" target="_blank">hellointerview.com/learn/system-design</a>
+    </div>
+
+    <hr>
+
+    <h2>How to Practice</h2>
+    <ul>
+      <li><strong>Framework:</strong> Requirements → Capacity Estimation → API Design → Data Model → High-Level Design → Deep Dive → Tradeoffs</li>
+      <li><strong>Time yourself:</strong> 35-40 minutes per design from start to finish</li>
+      <li><strong>Draw it:</strong> Always sketch the architecture — boxes and arrows matter</li>
+      <li><strong>Know your numbers:</strong> QPS, storage, bandwidth estimates off the top of your head</li>
+      <li><strong>Tradeoffs:</strong> For every choice, explain why <em>not</em> the alternative</li>
+      <li><strong>Failure modes:</strong> What breaks at 10x traffic? During a regional outage?</li>
+    </ul>
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'sd_tracker_done';
+
+    const designs = [
+      { name: 'URL Shortener (bit.ly/tinyurl)', company: 'Google, Meta' },
+      { name: 'Chat System (WhatsApp/Messenger)', company: 'Meta, Amazon' },
+      { name: 'News Feed (Twitter/Instagram)', company: 'Meta, Google' },
+      { name: 'Rate Limiter (distributed)', company: 'Amazon, Stripe' },
+      { name: 'Distributed Key-Value Store', company: 'Amazon (Dynamo), Google' },
+    ];
+
+    const concepts = [
+      { name: 'Load Balancing', why: 'Distribute traffic across servers (Round Robin, Consistent Hashing, Least Connections)' },
+      { name: 'Caching', why: 'Redis/Memcached, CDN, cache invalidation strategies, write-through vs write-around' },
+      { name: 'Database Sharding', why: 'Horizontal partitioning, consistent hashing, rebalancing, hot spots' },
+      { name: 'SQL vs NoSQL', why: 'When to use each — relational integrity vs flexible schema vs scale' },
+      { name: 'Message Queues', why: 'Kafka, RabbitMQ — async processing, decoupling, event-driven architecture' },
+      { name: 'CAP Theorem', why: 'Consistency vs Availability vs Partition Tolerance — tradeoffs in distributed systems' },
+      { name: 'Consistent Hashing', why: 'Minimal reshuffling when nodes added/removed — used by Dynamo, Cassandra' },
+      { name: 'Rate Limiting', why: 'Token bucket, leaky bucket, sliding window — prevent abuse at scale' },
+      { name: 'Leader Election', why: 'Paxos, Raft, ZooKeeper — how distributed systems pick a primary' },
+      { name: 'Blob Storage', why: 'S3/GCS — object storage for media, CDN integration, static asset serving' },
+    ];
+
+    let done = new Set();
+
+    function loadState() {
+      try { const raw = localStorage.getItem(STORAGE_KEY); if (raw) done = new Set(JSON.parse(raw)); } catch {}
+    }
+    function saveState() { localStorage.setItem(STORAGE_KEY, JSON.stringify([...done])); }
+
+    function renderTable(tbodyId, items, offset) {
+      const tbody = document.getElementById(tbodyId);
+      tbody.innerHTML = '';
+      items.forEach((item, i) => {
+        const idx = offset + i;
+        const key = idx.toString();
+        const isDone = done.has(key);
+        const tr = document.createElement('tr');
+        if (isDone) tr.className = 'row-done';
+
+        const td1 = document.createElement('td');
+        td1.setAttribute('data-label', 'Item');
+        td1.textContent = item.name;
+
+        const td2 = document.createElement('td');
+        td2.setAttribute('data-label', 'Detail');
+        td2.style.fontSize = '.82rem';
+        td2.style.color = '#64748b';
+        td2.textContent = item.company || item.why;
+
+        const td3 = document.createElement('td');
+        td3.setAttribute('data-label', 'Done');
+        td3.style.textAlign = 'center';
+        td3.style.width = '50px';
+        const btn = document.createElement('button');
+        btn.className = 'status-btn' + (isDone ? ' done' : '');
+        btn.textContent = isDone ? '✓' : '';
+        btn.addEventListener('click', () => toggle(idx));
+        td3.appendChild(btn);
+
+        tr.appendChild(td1); tr.appendChild(td2); tr.appendChild(td3);
+        tbody.appendChild(tr);
+      });
+    }
+
+    function render() {
+      renderTable('designBody', designs, 0);
+      renderTable('conceptBody', concepts, designs.length);
+      updateProgress();
+    }
+
+    function toggle(idx) {
+      const key = idx.toString();
+      if (done.has(key)) done.delete(key); else done.add(key);
+      saveState(); render();
+    }
+
+    function updateProgress() {
+      const total = designs.length + concepts.length;
+      const doneCount = done.size;
+      const pct = total ? (doneCount / total * 100) : 0;
+      document.getElementById('progressFill').style.width = pct + '%';
+      document.getElementById('doneCount').textContent = doneCount;
+      document.getElementById('totalCount').textContent = total;
+    }
+
+    document.getElementById('markAllBtn').addEventListener('click', () => {
+      for (let i = 0; i < designs.length + concepts.length; i++) done.add(i.toString());
+      saveState(); render();
+    });
+    document.getElementById('resetBtn').addEventListener('click', () => { done.clear(); saveState(); render(); });
+
+    loadState(); render();
+  </script>
+</body>
+</html>
