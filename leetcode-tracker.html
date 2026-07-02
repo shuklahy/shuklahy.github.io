@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coding Interview Prep - LeetCode Tracker</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: #f7f8fc;
+      color: #1e293b;
+      line-height: 1.7;
+      padding: 40px 20px;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    h1 { font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 4px; }
+    h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #7c3aed;
+      margin-top: 36px;
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+    p, li { margin-bottom: 8px; }
+    a {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color .15s;
+    }
+    a:hover { color: #7c3aed; text-decoration: underline; }
+    .subtitle { color: #64748b; font-size: .95rem; margin-bottom: 24px; }
+    hr { border: none; border-top: 2px solid #e2e8f0; margin: 28px 0; }
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin-bottom: 28px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.06);
+      border: 1px solid #e2e8f0;
+    }
+    .card p { margin-bottom: 4px; }
+    .card a { font-size: .9rem; word-break: break-all; }
+    .badge {
+      display: inline-block;
+      background: #ede9fe;
+      color: #7c3aed;
+      font-size: .72rem;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 20px;
+      margin-right: 6px;
+    }
+    ul { padding-left: 20px; }
+    ul li { list-style: disc; color: #334155; }
+
+    /* Progress */
+    .progress-wrap {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .progress-bar {
+      flex: 1;
+      min-width: 140px;
+      height: 12px;
+      background: #e2e8f0;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #7c3aed, #ec4899);
+      border-radius: 99px;
+      transition: width .3s ease;
+    }
+    .progress-text { font-size: .9rem; color: #64748b; font-weight: 600; white-space: nowrap; }
+    .progress-btns { display: flex; gap: 8px; }
+    .btn {
+      font-family: inherit;
+      font-size: .8rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      background: #fff;
+      color: #475569;
+      cursor: pointer;
+      transition: all .15s;
+      box-shadow: 0 1px 2px rgba(0,0,0,.04);
+    }
+    .btn:hover { background: #f1f5f9; border-color: #cbd5e1; }
+    .btn-danger:hover { background: #fef2f2; border-color: #fca5a5; color: #dc2626; }
+
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .9rem;
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,.06);
+      border: 1px solid #e2e8f0;
+    }
+    th {
+      text-align: left;
+      color: #475569;
+      font-weight: 700;
+      font-size: .8rem;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      padding: 12px 14px;
+      background: #f8fafc;
+      border-bottom: 2px solid #e2e8f0;
+    }
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid #f1f5f9;
+      vertical-align: middle;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #f8fafc; }
+    td:nth-child(1) {
+      color: #7c3aed;
+      font-weight: 600;
+      font-size: .82rem;
+      width: 16%;
+    }
+
+    .status-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+      border: 2px solid #d1d5db;
+      background: #fff;
+      color: transparent;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .15s;
+      flex-shrink: 0;
+    }
+    .status-btn.done {
+      background: #f0fdf4;
+      border-color: #22c55e;
+      color: #16a34a;
+    }
+    .status-btn:hover { border-color: #7c3aed; background: #f5f3ff; }
+
+    .row-done td { background: #fafafa; }
+    .row-done td:nth-child(2) a { color: #94a3b8; text-decoration: line-through; }
+
+    @media (max-width: 600px) {
+      table, thead, tbody, th, td, tr { display: block; }
+      thead, th { display: none; }
+      td {
+        padding: 8px 12px;
+        position: relative;
+        padding-left: 100px;
+        display: flex;
+        align-items: center;
+        min-height: 30px;
+      }
+      td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 12px;
+        font-weight: 700;
+        color: #7c3aed;
+        font-size: .8rem;
+        width: 80px;
+      }
+      td:nth-child(1) { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Coding Interview Prep</h1>
+    <p class="subtitle">Click ✓ to track progress — saved automatically in your browser</p>
+
+    <!-- Progress -->
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <span class="progress-text"><span id="doneCount">0</span> / <span id="totalCount">0</span> done</span>
+      <div class="progress-btns">
+        <button class="btn" id="markAllBtn">Mark All Done</button>
+        <button class="btn btn-danger" id="resetBtn">Reset</button>
+      </div>
+    </div>
+
+    <h2>Curated Lists (Start Here)</h2>
+    <div class="card">
+      <p><strong>Grind 75</strong> <span class="badge">Updated Blind 75</span></p>
+      <a href="https://www.techinterviewhandbook.org/grind75" target="_blank">https://www.techinterviewhandbook.org/grind75</a>
+      <p style="margin-top:14px"><strong>LeetCode Top Interview 150</strong> <span class="badge">Official</span></p>
+      <a href="https://leetcode.com/studyplan/top-interview-150/" target="_blank">https://leetcode.com/studyplan/top-interview-150/</a>
+    </div>
+
+    <h2>The Core 25 Problems</h2>
+    <p style="color:#64748b;margin-bottom:16px">Covers ~60% of FAANG interview questions</p>
+    <table>
+      <thead>
+        <tr><th>Pattern</th><th>Problem</th><th style="width:50px;text-align:center;">Done</th></tr>
+      </thead>
+      <tbody id="problemBody">
+      </tbody>
+    </table>
+
+    <hr>
+
+    <h2>Key Advice</h2>
+    <ul>
+      <li>Master <strong>12 patterns</strong>, not 500 problems</li>
+      <li>Solve by pattern group (all sliding window together, etc.)</li>
+      <li>Time yourself: max <strong>20 min per problem</strong></li>
+      <li>Re-solve from scratch the ones you got wrong</li>
+      <li><strong>50 problems done deeply > 200 done shallow</strong></li>
+    </ul>
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'leetcode_tracker_done';
+
+    const problems = [
+      { pattern: 'Arrays',           name: 'Two Sum',                                url: 'https://leetcode.com/problems/two-sum/' },
+      { pattern: 'Arrays',           name: 'Product of Array Except Self',           url: 'https://leetcode.com/problems/product-of-array-except-self/' },
+      { pattern: 'Arrays',           name: 'Maximum Subarray',                       url: 'https://leetcode.com/problems/maximum-subarray/' },
+      { pattern: 'Arrays',           name: 'Contains Duplicate',                     url: 'https://leetcode.com/problems/contains-duplicate/' },
+      { pattern: 'Arrays',           name: 'Best Time to Buy and Sell Stock',        url: 'https://leetcode.com/problems/best-time-to-buy-and-sell-stock/' },
+      { pattern: 'Two Pointers',     name: '3Sum',                                   url: 'https://leetcode.com/problems/3sum/' },
+      { pattern: 'Two Pointers',     name: 'Container With Most Water',              url: 'https://leetcode.com/problems/container-with-most-water/' },
+      { pattern: 'Sliding Window',   name: 'Longest Substring Without Repeating Characters', url: 'https://leetcode.com/problems/longest-substring-without-repeating-characters/' },
+      { pattern: 'Binary Search',    name: 'Search in Rotated Sorted Array',         url: 'https://leetcode.com/problems/search-in-rotated-sorted-array/' },
+      { pattern: 'Linked List',      name: 'Reverse Linked List',                    url: 'https://leetcode.com/problems/reverse-linked-list/' },
+      { pattern: 'Linked List',      name: 'Merge Two Sorted Lists',                 url: 'https://leetcode.com/problems/merge-two-sorted-lists/' },
+      { pattern: 'Trees',            name: 'Invert Binary Tree',                      url: 'https://leetcode.com/problems/invert-binary-tree/' },
+      { pattern: 'Trees',            name: 'Validate Binary Search Tree',            url: 'https://leetcode.com/problems/validate-binary-search-tree/' },
+      { pattern: 'Trees',            name: 'Binary Tree Level Order Traversal',      url: 'https://leetcode.com/problems/binary-tree-level-order-traversal/' },
+      { pattern: 'Graphs',           name: 'Number of Islands',                      url: 'https://leetcode.com/problems/number-of-islands/' },
+      { pattern: 'Graphs',           name: 'Course Schedule',                        url: 'https://leetcode.com/problems/course-schedule/' },
+      { pattern: 'DP',               name: 'Climbing Stairs',                        url: 'https://leetcode.com/problems/climbing-stairs/' },
+      { pattern: 'DP',               name: 'Coin Change',                            url: 'https://leetcode.com/problems/coin-change/' },
+      { pattern: 'DP',               name: 'Longest Increasing Subsequence',         url: 'https://leetcode.com/problems/longest-increasing-subsequence/' },
+      { pattern: 'DP',               name: 'Longest Common Subsequence',             url: 'https://leetcode.com/problems/longest-common-subsequence/' },
+      { pattern: 'Heap',             name: 'Kth Largest Element in an Array',        url: 'https://leetcode.com/problems/kth-largest-element-in-an-array/' },
+      { pattern: 'Heap',             name: 'Top K Frequent Elements',                url: 'https://leetcode.com/problems/top-k-frequent-elements/' },
+      { pattern: 'Intervals',        name: 'Merge Intervals',                        url: 'https://leetcode.com/problems/merge-intervals/' },
+      { pattern: 'Matrix',           name: 'Set Matrix Zeroes',                      url: 'https://leetcode.com/problems/set-matrix-zeroes/' },
+      { pattern: 'Backtracking',     name: 'Subsets',                                url: 'https://leetcode.com/problems/subsets/' },
+    ];
+
+    let done = new Set();
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const arr = JSON.parse(raw);
+          done = new Set(arr);
+        }
+      } catch {}
+    }
+
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify([...done]));
+    }
+
+    function render() {
+      const tbody = document.getElementById('problemBody');
+      tbody.innerHTML = '';
+      problems.forEach((p, i) => {
+        const key = i.toString();
+        const isDone = done.has(key);
+        const tr = document.createElement('tr');
+        if (isDone) tr.className = 'row-done';
+
+        const td1 = document.createElement('td');
+        td1.setAttribute('data-label', 'Pattern');
+        td1.textContent = p.pattern;
+
+        const td2 = document.createElement('td');
+        td2.setAttribute('data-label', 'Problem');
+        const a = document.createElement('a');
+        a.href = p.url;
+        a.target = '_blank';
+        a.textContent = p.name;
+        td2.appendChild(a);
+
+        const td3 = document.createElement('td');
+        td3.setAttribute('data-label', 'Done');
+        td3.style.textAlign = 'center';
+        td3.style.width = '50px';
+        const btn = document.createElement('button');
+        btn.className = 'status-btn' + (isDone ? ' done' : '');
+        btn.textContent = isDone ? '✓' : '';
+        btn.addEventListener('click', () => toggle(i));
+        td3.appendChild(btn);
+
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tr.appendChild(td3);
+        tbody.appendChild(tr);
+      });
+      updateProgress();
+    }
+
+    function toggle(idx) {
+      const key = idx.toString();
+      if (done.has(key)) done.delete(key);
+      else done.add(key);
+      saveState();
+      render();
+    }
+
+    function updateProgress() {
+      const total = problems.length;
+      const doneCount = done.size;
+      const pct = total ? (doneCount / total * 100) : 0;
+      document.getElementById('progressFill').style.width = pct + '%';
+      document.getElementById('doneCount').textContent = doneCount;
+      document.getElementById('totalCount').textContent = total;
+    }
+
+    document.getElementById('markAllBtn').addEventListener('click', () => {
+      problems.forEach((_, i) => done.add(i.toString()));
+      saveState();
+      render();
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      done.clear();
+      saveState();
+      render();
+    });
+
+    loadState();
+    render();
+  </script>
+</body>
+</html>
